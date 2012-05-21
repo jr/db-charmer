@@ -23,6 +23,9 @@ module DbCharmer
         # Setup all the slaves related magic if needed
         setup_slaves_magic(opt[:slaves], forced_slave_reads, should_exist)
 
+        # Set up slaves weights
+        setup_slaves_weights_magic(opt[:weights]) if opt[:weights]
+
         # Setup inheritance magic
         setup_children_magic(opt)
 
@@ -85,6 +88,9 @@ module DbCharmer
         self.send(:include, DbCharmer::ActiveRecord::MasterSlaveRouting::InstanceMethods)
       end
 
+      def setup_slaves_weights_magic(weights)
+        self.db_charmer_slaves_weights = weights
+      end
     end
   end
 end
