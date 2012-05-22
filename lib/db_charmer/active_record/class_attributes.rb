@@ -78,7 +78,7 @@ module DbCharmer
       @@db_charmer_slaves_weights_sum = {}
       def db_charmer_slaves_weights=(weights)
         @@db_charmer_slaves_weights[self.name] = weights
-        @@db_charmer_slaves_weights_sum[self.name] = weights.values.reduce(:+)
+        @@db_charmer_slaves_weights_sum[self.name] = weights.values.inject{|sum, weight| sum + weight }
       end
 
       def db_charmer_slaves_weights
